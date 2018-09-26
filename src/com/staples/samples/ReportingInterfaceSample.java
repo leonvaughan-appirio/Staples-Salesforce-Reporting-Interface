@@ -28,9 +28,6 @@ import com.sforce.ws.ConnectorConfig;
 import com.sforce.ws.ConnectionException;
 
 public class ReportingInterfaceSample {
-	//public static final String USERNAME = "reportinginterface@staples-solutions.com.servcloud";
-    //public static final String PASSWORD = "London12$CLNhwvI0uTsT3AWKrQFgChAz";
-    //public static final String END_POINT = "https://test.salesforce.com/services/Soap/c/43.0/0DF6E0000004Fhr";
 	public static final String CREDENTIALSFILEPATH = "salesforce_credentials.properties";
 	public static final String PROPSFILEPATH = "sample.properties";
     public static final String OUTPUTFILEPATH = "data/";
