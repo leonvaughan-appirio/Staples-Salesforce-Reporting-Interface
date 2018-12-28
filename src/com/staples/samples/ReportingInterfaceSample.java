@@ -19,6 +19,7 @@ import com.sforce.soap.enterprise.sobject.Case;
 import com.sforce.soap.enterprise.sobject.CaseMilestone;
 import com.sforce.soap.enterprise.sobject.EmailMessage;
 import com.sforce.soap.enterprise.sobject.Case_Status_History__c;
+import com.sforce.soap.enterprise.sobject.Task;
 import com.sforce.soap.enterprise.sobject.SObject;
 import com.sforce.soap.enterprise.GetUpdatedResult;
 import com.sforce.ws.ConnectorConfig;
@@ -174,6 +175,10 @@ public class ReportingInterfaceSample {
 			   GetUpdatedResult urSta = connection.getUpdated("Case_Status_History__c", startTime, endTime);
 			   System.out.println("GetUpdateResult CASE STATUS HISTORY: " + urSta.getIds().length);
 			   
+			   // Get Task records created since last run
+			   GetUpdatedResult urT = connection.getUpdated("Task", startTime, endTime);
+			   System.out.println("GetUpdateResult TASK: " + urT.getIds().length);
+			   
 			   // Get Case Milestone records updated since last run. CaseMilestone is not replicable so need to use standard SOQL query
 			   // to get records updated
 			   SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -188,6 +193,9 @@ public class ReportingInterfaceSample {
 	          
 	           // Get the CaseStatusHistory data and write to file
 	           queryCaseStatusHistory(urSta.getIds());
+	           
+	           // Get the Task data and write to file
+	           queryTask(urT.getIds());
 	          
 	           // Get the CaseMilestone data and write to file
 	           queryCaseMilestones(mIds);
@@ -473,6 +481,149 @@ public class ReportingInterfaceSample {
 				   }
 			   } else {
 				   System.out.println("No CASE STATUS HISTORY records created since replication last ran.");
+			   }
+		   }
+		   catch (ConnectionException ce) {
+			   ce.printStackTrace();
+		   }
+		   catch (IOException ex) {
+	            ex.printStackTrace();
+	       }
+		   catch (Exception e) {
+	            e.printStackTrace();
+	       }
+		   
+	   }
+	   
+	   // Get the Task records to file
+	   private void queryTask(String[] ids) {
+		   String fieldList = "Id, What.Type, What.Id, Who.Type, Who.Id, ActivityDate, Activity_Date__c, Activity_Open_Time__c, Business_Type__c, "
+		   		+ "CallDisposition, CallDurationInSeconds, CallObject, CallType, CreatedDate, IsClosed, Priority, Status, Status__c, Subject, "
+		   		+ "Type, TaskSubType, Task_Type__c, Task_Type_2__c, SystemModStamp";
+			   OUTPUTFILENAME = "TASK_EXTRACT_";
+			   
+		   try {
+			   if(ids.length>0) {
+				   
+				   SObject[] sObjects = connection.retrieve(fieldList, "Task", ids);
+				   
+				   if (sObjects.length > 0) {
+					   System.out.println("\nQuery retrieved "
+							   + sObjects.length + " Task records updated since last run.");
+	
+						   // Create the output file
+						   Calendar endTime = new GregorianCalendar();
+						   String fileName = OUTPUTFILEPATH + OUTPUTFILENAME
+								    + endTime.get(Calendar.YEAR) 
+								   	+ endTime.get(Calendar.MONTH)
+						   			+ endTime.get(Calendar.DAY_OF_MONTH) + "-"
+						   			+ endTime.get(Calendar.HOUR)
+						   			+ endTime.get(Calendar.MINUTE)
+						   			+ endTime.get(Calendar.SECOND)
+						   			+ ".txt";
+						   
+						   FileWriter fw = new FileWriter(new File(fileName));
+						   
+						   // Create file header
+						   String fileHeader = 
+								    "ID" + "\t" +
+								    "WHATTYPE" + "\t" +
+								    "WHATID" + "\t" +
+						    		"WHOTYPE"+ "\t" +
+						    		"WHOID"+ "\t" +
+						    		"ACTIVITYDATE" + "\t" +
+						    		"ACTIVITY_DATE__c" + "\t" +
+						    		"ACTIVITY_OPEN_TIME__c" + "\t" +
+						    		"BUSINESS_TYPE__c" + "\t" +
+						    		"CALLDISPOSITION" + "\t" +
+						    		"CALLOBJECT" + "\t" +
+						    		"CALLDURATIONINSECS" + "\t" +
+						    		"CALLTYPE" + "\t" +
+						    		"CREATEDDATE" + "\t" +
+						    		"ISCLOSED" + "\t" +
+						    		"PRIORITY" + "\t" +
+						    		"STATUS" + "\t" +
+						    		"STATUS__c" + "\t" +
+						    		"SUBJECT" + "\t" +
+						    		"TYPE" + "\t" +
+						    		"TASKSUBTYPE" + "\t" +
+						    		"TASK_TYPE__c" + "\t" +
+						    		"TASK_TYPE_2__c" + "\t" +
+						    		"SYSTEMMODSTAMP";
+						    
+						    // Write header to file
+						    fw.write(String.format(fileHeader));
+						    //new line
+						    fw.write(System.lineSeparator());
+					   
+						   for (int i = 0; i < sObjects.length; ++i) {
+							   Task t = (Task) sObjects[i];						 
+							   // Get an instance of a Calendar, using the current time.
+							   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							   String actDate = "";
+							   // Check if the date fields is null, if so return a blank string
+							   if (t.getActivityDate() != null)
+								   actDate = dateFormat.format(t.getActivityDate().getTime());
+							   
+							   String actDate2 = "";
+							   // Check if the date fields is null, if so return a blank string
+							   if (t.getActivity_Date__c() != null)
+								   actDate2 = dateFormat.format(t.getActivity_Date__c().getTime());
+							   
+							   String createdDate = "";
+							   // Check if the date fields is null, if so return a blank string
+							   if (t.getCreatedDate() != null)
+								   createdDate = dateFormat.format(t.getCreatedDate().getTime());
+							   
+							   String whatType = "";
+							   // Check if the fields is null, if so return a blank string
+							   if (t.getWhatId() != null)
+								   whatType = t.getWhat().getType();
+							   
+							   String whoType = "";
+							   // Check if the fields is null, if so return a blank string
+							   if (t.getWhoId() != null)
+								   whoType = t.getWho().getType();
+							   
+							   
+							   // Get the name of the sObject
+							   String taskRecord = 
+									        t.getId() + "\t" +
+											whatType + "\t" +
+									   		t.getWhatId() + "\t" +
+									   		whoType + "\t" +
+									   		t.getWhoId() + "\t" +
+									   		actDate + "\t" +
+									   		actDate2 + "\t" +
+									   		t.getActivity_Open_Time__c() + "\t" +
+									   		t.getBusiness_Type__c() + "\t" +
+									   		t.getCallDisposition() + "\t" +
+									   		t.getCallDurationInSeconds() + "\t" +
+									   		t.getCallObject() + "\t" +
+									   		t.getCallType() + "\t" +
+									   		createdDate + "\t" +
+							   				t.getIsClosed() + "\t" +
+							   				t.getPriority() + "\t" +
+							   				t.getStatus() + "\t" +
+							   				t.getStatus__c() + "\t" +
+							   				t.getSubject() + "\t" +
+							   				t.getType() + "\t" +
+							   				t.getTaskSubtype() + "\t" +
+							   				t.getTask_Type__c() + "\t" +
+							   				t.getTask_Type_2__c() + "\t" +
+							   				dateFormat.format(t.getSystemModstamp().getTime());
+							   // Write to file
+							   fw.write(String.format(taskRecord));
+							   fw.write(System.lineSeparator()); 
+					
+					    	}
+						    // Close the file
+						    fw.close();
+				   } else {
+					   System.out.println("No records found.");
+				   }
+			   } else {
+				   System.out.println("No TASK records created since replication last ran.");
 			   }
 		   }
 		   catch (ConnectionException ce) {
