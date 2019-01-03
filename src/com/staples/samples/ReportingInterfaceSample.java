@@ -179,7 +179,7 @@ public class ReportingInterfaceSample {
 			   GetUpdatedResult urT = connection.getUpdated("Task", startTime, endTime);
 			   System.out.println("GetUpdateResult TASK: " + urT.getIds().length);
 			   
-			   // Get Case Milestone records updated since last run. CaseMilestone is not replicable so need to use standard SOQL query
+			   // Get Case Milestone records updated since last run. CaseMilestone is not replicateable so need to use standard SOQL query
 			   // to get records updated
 			   SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 			   String[] mIds = getUpdatedRecords("CaseMilestone", df.format(startTime.getTime()), df.format(endTime.getTime()));
@@ -303,7 +303,7 @@ public class ReportingInterfaceSample {
 	   
 	   // Export the EmailMessage records to file
 	   private void queryEmailMessages(String[] ids) {
-		   String fieldList = "Parent.CaseNumber, CreatedDate, Business_Unit__c, Incoming, IsOpened, "
+		   String fieldList = "Parent.CaseNumber, CreatedDate, Business_Unit__c, Incoming, "
 		   		+ "FromAddress, ToAddress, CcAddress, Status, Subject, SystemModStamp";
 		   OUTPUTFILENAME = "EMAILMESSAGE_EXTRACT_";
 		   
@@ -335,8 +335,7 @@ public class ReportingInterfaceSample {
 								    "CREATEDDATE" + "\t" +
 								    "BUSINESSUNIT" + "\t" +
 								    "INCOMING" + "\t" +
-								    "ISOPENED" + "\t" +
-						    		"FROMADDRESS"+ "\t" +
+								    "FROMADDRESS"+ "\t" +
 						    		"TOADDRESS" + "\t" +
 						    		"CCADDRESS" + "\t" +
 						    		"STATUS" + "\t" +
@@ -363,8 +362,7 @@ public class ReportingInterfaceSample {
 									   		dateFormat.format(ema.getCreatedDate().getTime()) + "\t" +
 									   		ema.getBusiness_Unit__c() + "\t" +
 									   		ema.getIncoming() + "\t" +
-									   		ema.getIsOpened() + "\t" +
-							   				ema.getFromAddress() + "\t" +
+									   		ema.getFromAddress() + "\t" +
 							   				ema.getToAddress() + "\t" +
 							   				ema.getCcAddress() + "\t" +
 							   				ema.getStatus() + "\t" +
