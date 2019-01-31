@@ -17,6 +17,7 @@ public class CaseExtract {
 		   		   + "Priority, "
 		   		   + "Origin, "
 		   		   + "ClosedDate, "
+		   		   + "Subject, "
 		   		   + "SystemModStamp, "
 				   + "X0_2_hrs_Remaining_SLA__c, "
 				   + "X4_2_hrs_Remaining_SLA__c, "
@@ -85,73 +86,74 @@ public class CaseExtract {
 		// Get the file header	   
 		public String getFileHeader() {
 		   String fileHeader =
-				       "CASENUMBER" + "\t" +
-					   "CREATEDDATE" + "\t" +
-					   "STATUS"+ "\t" +
-					   "PRIORITY" + "\t" +
-					   "ORIGIN" + "\t" +
-					   "CLOSEDDATE" + "\t" +
-					   "SYSTEMMODSTAMP"+ "\t" + 
-				   	   "0-2 HRS REMAINING SLA" + "\t" + 
-					   "4-2 HRS REMAINING SLA" + "\t" + 
-					   "ACCOUNT CONTACT RELATIONSHIP VALIDATED" + "\t" + 
-					   "ACCOUNT ERP NUMBER" + "\t" + 
-					   "ACCOUNT ERP NUMBER" + "\t" + 
-					   "ACCOUNT ID" + "\t" + 
-					   "ACCOUNT VALIDATED" + "\t" + 
-					   "APPROVAL TYPE" + "\t" + 
-					   "ARTICLE CODE" + "\t" + 
-					   "AUTO-REPLY" + "\t" + 
-					   "AUTO-REPLY ON CASE CLOSURE" + "\t" + 
-					   "AUTO-REPLY TEMPLATE" + "\t" + 
-					   "AUTO-RESPONSE EMAIL" + "\t" + 
-					   "BUSINESS UNIT" + "\t" + 
-					   "CARRIER" + "\t" + 
-					   "CASE ORIGIN DETAIL" + "\t" + 
-					   "CASE TEAM HIERARCHY" + "\t" + 
-					   "CLOSED TODAY" + "\t" + 
-					   "CONSIGNMENT NUMBER" + "\t" + 
-					   "CONTACT FIRST NAME" + "\t" + 
-					   "CONTACT LAST NAME" + "\t" + 
-					   "COUNT" + "\t" + 
-					   "COUNTRY" + "\t" + 
-					   "CREDIT AMOUNT" + "\t" + 
-					   "CURRENT QUEUE" + "\t" + 
-					   "CUSTOMER'S LATEST EMAIL SUBJECT" + "\t" + 
-					   "CUSTOMER CHANNEL" + "\t" + 
-					   "DATE/TIME STATUS LAST CHANGED" + "\t" + 
-					   "EMAILMESSAGEID" + "\t" + 
-					   "EMAIL ROUTING RULE" + "\t" + 
-					   "ERP DELIVERY NUMBER" + "\t" + 
-					   "ERP ORDER NUMBER" + "\t" + 
-					   "ERP RETURNS NUMBER" + "\t" + 
-					   "ERP STAPLES INVOICE NUMBER" + "\t" + 
-					   "ERP STAPLES PO NUMBER" + "\t" + 
-					   "FIRST CONTACT RESOLUTION" + "\t" + 
-					   "FOLLOW-UP DATE/TIME" + "\t" + 
-					   "INCONTACT CONTACTID" + "\t" + 
-					   "IN PROGRESS" + "\t" + 
-					   "IS REOPENED" + "\t" + 
-					   "LAST STATUS UPDATE" + "\t" + 
-					   "NEW" + "\t" + 
-					   "NEW EMAIL FROM CUSTOMER?" + "\t" + 
-					   "NUMBER OF CUSTOMER CONTACTS" + "\t" + 
-					   "ORIGINAL QUEUE OWNER" + "\t" + 
-					   "OTHER ORDER NUMBER" + "\t" + 
-					   "OVERDUE SLAS" + "\t" + 
-					   "OWNER ACTIVE TIME IN HOURS" + "\t" + 
-					   "OWNER ACTIVE TIME IN SECONDS" + "\t" + 
-					   "OWNER TEAM NAME" + "\t" + 
-					   "PENDING ADVISOR RESPONSE" + "\t" + 
-					   "PENDING CUSTOMER RESPONSE" + "\t" + 
-					   "PENDING EXTERNAL RESPONSE" + "\t" + 
-					   "REASON DETAIL" + "\t" + 
-					   "REASON FOR CONTACT" + "\t" + 
-					   "REOPENED - PENDING ADVISOR" + "\t" + 
-					   "ROOT CAUSE" + "\t" + 
-					   "SLA START" + "\t" + 
-					   "STATUS INDICATOR" + "\t" + 
-					   "SUB-STATUS";
+				   "CaseNumber" + "\t"
+				   		   + "CreatedDate" + "\t"
+				   		   + "Status" + "\t"
+				   		   + "Priority" + "\t"
+				   		   + "Origin" + "\t"
+				   		   + "ClosedDate" + "\t"
+				   		   + "Subject" + "\t"
+				   		   + "SystemModStamp" + "\t"
+						   + "X0_2_hrs_Remaining_SLA__c" + "\t"
+						   + "X4_2_hrs_Remaining_SLA__c" + "\t"
+						   + "Account_Contact_Relationship_Validated__c" + "\t"
+						   + "Account_ERP_Number__c" + "\t"
+						   + "Related_Account_ERP_Number__c" + "\t"
+						   + "Account_ID__c" + "\t"
+						   + "Account_Validated__c" + "\t"
+						   + "Approval_Type__c" + "\t"
+						   + "Article_Code__c" + "\t"
+						   + "Auto_Reply__c" + "\t"
+						   + "Auto_Reply_on_Case_Closure__c" + "\t"
+						   + "Auto_Reply_Template__c" + "\t"
+						   + "Auto_Response_Email__c" + "\t"
+						   + "BusinessUnit__c" + "\t"
+						   + "Carrier__c" + "\t"
+						   + "Case_Origin_Detail__c" + "\t"
+						   + "Case_Team_Hierarchy__c" + "\t"
+						   + "Closed_Today__c" + "\t"
+						   + "Consignment_Number__c" + "\t"
+						   + "Contact_First_Name__c" + "\t"
+						   + "Contact_Last_Name__c" + "\t"
+						   + "Count__c" + "\t"
+						   + "Country__c" + "\t"
+						   + "Credit_Amount__c" + "\t"
+						   + "Current_Queue_Name__c" + "\t"
+						   + "Customer_s_Latest_Email_Subject__c" + "\t"
+						   + "Customer_Channel__c" + "\t"
+						   + "Date_Time_Status_Last_Changed__c" + "\t"
+						   + "EmailMessageId__c" + "\t"
+						   + "Email_Routing_Rule__c" + "\t"
+						   + "ERP_Delivery_Number__c" + "\t"
+						   + "ERP_Order_Number__c" + "\t"
+						   + "ERP_Returns_Number__c" + "\t"
+						   + "ERP_Staples_Invoice_Number__c" + "\t"
+						   + "ERP_Staples_PO_Number__c" + "\t"
+						   + "First_Call_Resolution__c" + "\t"
+						   + "Follow_Up_Date_Time__c" + "\t"
+						   + "InContact_ContactID__c" + "\t"
+						   + "isIn_Progress__c" + "\t"
+						   + "Is_Reopened__c" + "\t"
+						   + "Last_Status_Update__c" + "\t"
+						   + "isNew__c" + "\t"
+						   + "New_Email_From_Customer__c" + "\t"
+						   + "Number_of_Customer_Contacts__c" + "\t"
+						   + "Original_Queue_Owner__c" + "\t"
+						   + "Other_Order_Number__c" + "\t"
+						   + "Overdue_SLAs__c" + "\t"
+						   + "Owner_Active_Time_in_Hours__c" + "\t"
+						   + "Owner_Active_Time_in_Seconds__c" + "\t"
+						   + "Owner_Team_Name__c" + "\t"
+						   + "isPending_Advisor_Response__c" + "\t"
+						   + "isPending_Customer_Response__c" + "\t"
+						   + "isPending_External_Response__c" + "\t"
+						   + "Reason_Detail__c" + "\t"
+						   + "Reason_for_Contact__c" + "\t"
+						   + "isReopened_Pending_Advisor__c" + "\t"
+						   + "Root_Cause__c" + "\t"
+						   + "SLA_Start__c" + "\t"
+						   + "Status_Indicator__c" + "\t"
+						   + "Sub_Status__c";
 		
 		   return fileHeader;
 		}
@@ -174,6 +176,7 @@ public class CaseExtract {
 				   cas.getPriority() + "\t" +
 				   cas.getOrigin() + "\t" +
 				   formatDate(cas.getClosedDate()) + "\t" +
+				   cas.getSubject() + "\t" +
 				   formatDate(cas.getSystemModstamp()) + "\t" +
 				   cas.getX0_2_hrs_Remaining_SLA__c() + "\t" + 
 				   cas.getX4_2_hrs_Remaining_SLA__c() + "\t" + 

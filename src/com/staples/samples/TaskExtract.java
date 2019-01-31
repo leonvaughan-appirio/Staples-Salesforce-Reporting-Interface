@@ -41,30 +41,30 @@ public class TaskExtract {
 		// Get the file header	   
 		public String getFileHeader() {
 		   String fileHeader =
-				   "ID" + "\t" +
-				    "WHATTYPE" + "\t" +
-				    "WHATID" + "\t" +
-		    		"WHOTYPE"+ "\t" +
-		    		"WHOID"+ "\t" +
-		    		"ACTIVITYDATE" + "\t" +
-		    		"ACTIVITY_DATE__c" + "\t" +
-		    		"ACTIVITY_OPEN_TIME__c" + "\t" +
-		    		"BUSINESS_TYPE__c" + "\t" +
-		    		"CALLDISPOSITION" + "\t" +
-		    		"CALLOBJECT" + "\t" +
-		    		"CALLDURATIONINSECS" + "\t" +
-		    		"CALLTYPE" + "\t" +
-		    		"CREATEDDATE" + "\t" +
-		    		"ISCLOSED" + "\t" +
-		    		"PRIORITY" + "\t" +
-		    		"STATUS" + "\t" +
-		    		"STATUS__c" + "\t" +
-		    		"SUBJECT" + "\t" +
-		    		"TYPE" + "\t" +
-		    		"TASKSUBTYPE" + "\t" +
-		    		"TASK_TYPE__c" + "\t" +
-		    		"TASK_TYPE_2__c" + "\t" +
-		    		"SYSTEMMODSTAMP";
+				   "Id" + "\t" +
+				    "WhatType" + "\t" +
+				    "WhatId" + "\t" +
+		    		"WhoType"+ "\t" +
+		    		"WhoId"+ "\t" +
+		    		"ActivityDate" + "\t" +
+		    		"Activity_Date__c" + "\t" +
+		    		"Activity_Open_Time__c" + "\t" +
+		    		"Business_Type__c" + "\t" +
+		    		"CallDisposition" + "\t" +
+		    		"CallDurationInSecs" + "\t" +
+		    		"CallObject" + "\t" +
+		    		"CallType" + "\t" +
+		    		"CreatedDate" + "\t" +
+		    		"IsClosed" + "\t" +
+		    		"Priority" + "\t" +
+		    		"Status" + "\t" +
+		    		"Status__c" + "\t" +
+		    		"Subject" + "\t" +
+		    		"Type" + "\t" +
+		    		"TaskSubtype" + "\t" +
+		    		"Task_Type__c" + "\t" +
+		    		"Task_Type_2__c" + "\t" +
+		    		"SystemModStamp";
 		
 		   return fileHeader;
 		}

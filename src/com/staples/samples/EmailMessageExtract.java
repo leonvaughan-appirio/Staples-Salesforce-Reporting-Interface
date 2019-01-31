@@ -12,32 +12,56 @@ public class EmailMessageExtract {
 	   
 	   fieldList = 
 			   "Parent.CaseNumber, "
-			   + "CreatedDate, "
-			   + "Business_Unit__c, "
-			   + "Incoming, "
-			   + "FromAddress, "
-			   + "ToAddress, "
-			   + "CcAddress, "
-			   + "Status, "
-			   + "Subject, "
-			   + "SystemModStamp";
-	   
+					   + "BccAddress, "
+					   + "Business_Unit__c, "
+					   + "CcAddress, "
+					   + "CreatedDate, "
+					   + "Email_Override__c, "
+					   + "Exclude_From_SLA__c, "
+					   + "External_Email__c, "
+					   + "FirstOpenedDate, "
+					   + "ValidatedFromAddress, "
+					   + "FromAddress, "
+					   + "FromName, "
+					   + "HasAttachment, "
+					   + "IsExternallyVisible, "
+					   + "Incoming, "
+					   + "LastModifiedDate, "
+					   + "LastOpenedDate, "
+					   + "MessageDate, "
+					   + "Status, "
+					   + "Subject, "
+					   + "ToAddress, "
+					   + "SystemModStamp";
+			   
 	   return fieldList;
 	}
 		
 	// Get the file header	   
 	public String getFileHeader() {
 	   String fileHeader =
-			   "CASENUMBER" + "\t" +
-			    "CREATEDDATE" + "\t" +
-			    "BUSINESSUNIT" + "\t" +
-			    "INCOMING" + "\t" +
-			    "FROMADDRESS"+ "\t" +
-	    		"TOADDRESS" + "\t" +
-	    		"CCADDRESS" + "\t" +
-	    		"STATUS" + "\t" +
-	    		"SUBJECT" + "\t" +
-	    		"SYSTEMMODSTAMP";
+			   		"CaseNumber" + "\t"
+					   + "BccAddress" + "\t"
+					   + "Business_Unit__c" + "\t"
+					   + "CcAddress" + "\t"
+					   + "CreatedDate" + "\t"
+					   + "Email_Override__c" + "\t"
+					   + "Exclude_From_SLA__c"  + "\t"
+					   + "External_Email__c" + "\t"
+					   + "FirstOpenedDate" + "\t"
+					   + "ValidatedFromAddress" + "\t"
+					   + "FromAddress" + "\t"
+					   + "FromName" + "\t"
+					   + "HasAttachment" + "\t"
+					   + "IsExternallyVisible" + "\t"
+					   + "Incoming" + "\t"
+					   + "LastModifiedDate" + "\t"
+					   + "LastOpenedDate" + "\t"
+					   + "MessageDate" + "\t"
+					   + "Status" + "\t"
+					   + "Subject" + "\t"
+					   + "ToAddress" + "\t"
+					   + "SystemModStamp";
 	
 	   return fileHeader;
 	}
@@ -59,16 +83,28 @@ public class EmailMessageExtract {
 			   caseNum = ema.getParent().getCaseNumber();
 		   
 	    String fileRow =
-	    		caseNum + "\t" +
-	    		formatDate(ema.getCreatedDate()) + "\t" +
-		   		ema.getBusiness_Unit__c() + "\t" +
-		   		ema.getIncoming() + "\t" +
-		   		ema.getFromAddress() + "\t" +
-   				ema.getToAddress() + "\t" +
-   				ema.getCcAddress() + "\t" +
-   				ema.getStatus() + "\t" +
-			   	ema.getSubject() + "\t" +
-			   	formatDate(ema.getSystemModstamp());
+	    		caseNum + "\t"
+	    				+ ema.getBccAddress() + "\t"
+	    				+ ema.getBusiness_Unit__c() + "\t"
+						+ ema.getCcAddress() + "\t"
+						+ formatDate(ema.getCreatedDate()) + "\t"
+						+ ema.getEmail_Override__c() + "\t"
+						+ ema.getExclude_From_SLA__c()  + "\t"
+						+ ema.getExternal_Email__c() + "\t"
+						+ ema.getFirstOpenedDate() + "\t"
+						+ ema.getValidatedFromAddress() + "\t"
+						+ ema.getFromAddress() + "\t"
+						+ ema.getFromName() + "\t"
+						+ ema.getHasAttachment() + "\t"
+						+ ema.getIsExternallyVisible() + "\t"
+						+ ema.getIncoming() + "\t"
+						+ formatDate(ema.getLastModifiedDate()) + "\t"
+						+ formatDate(ema.getLastOpenedDate()) + "\t"
+						+ formatDate(ema.getMessageDate()) + "\t"
+						+ ema.getStatus() + "\t"
+						+ ema.getSubject() + "\t"
+						+ ema.getToAddress() + "\t"
+						+ formatDate(ema.getSystemModstamp());
 	
 	   return fileRow;
 	}
